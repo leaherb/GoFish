@@ -21,23 +21,7 @@ GoFish is a Python program that creates a report of Pearson correlation coeffici
  * Column 2-n: 4-digit year
 * Exception and error handling is not yet included
 
-## Example Dataset Source
+## Gapminder Datasets
 Downloads from <a href target="_blank" source="https://www.gapminder.org/data/">Gapminder</a>
 
 > Note: Gapminder data is sometimes based on very rough estimates or extrapolations. All data, statistics and visuals presented here should be considered generalizations only. 
-
-#### Population
-* Description: Total population
-* Download: population_total.csv 
-
-#### Income
-* Description: Gross domestic product per person adjusted for differences in purchasing power (in international dollars, fixed 2011 prices, PPP based on 2011 ICP).
-* Download: income_per_person_gdppercapita_ppp_inflation_adjusted.csv
-
-#### Life expectancy (years)
-* Description: The average number of years a newborn child would live if current mortality patterns were to stay the same.
-* Download: life_expectancy_years.csv
-
-#### Water, overall access (%)
-* Description: The percentage of people using at least asic water services. This indicator encompasses both people using basic water services as well as those using safely managed water services. Basic drinking water services is defined as drinking water from an improved source, provided collection time is not more than 30 minutes for a round trip. Improved water sources include piped water, borholes or tubewells, protected dug wells, protected springs, and packaged or delivered water.
-* Download: at_least_basic_water_source_overall_access_percent.csv
