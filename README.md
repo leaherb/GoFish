@@ -31,7 +31,7 @@ Note: Please take care to merge the latest from "upstream" before making a pull 
 ### Enhancement Ideas
 GoFish is in it's first Phase of development. As it stands, it searches CSV files already existing in a local directory. Future Phases could include:
 
-* general code improvement (improve performance, refactor, document, etc.)
+* code improvements (improve performance, refactor, document, etc.)
 * do not limit feature exploration to Gapminder.org data
 * more feature filters
 * data cleaning/trimming options with a data storage feature
