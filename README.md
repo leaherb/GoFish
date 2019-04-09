@@ -14,6 +14,11 @@ Gapminder.org offers a large number 'global facts' datasets, available for downl
 
 As a Data Analyst looking for correlations between any number of datasets in order to narrow my 'global facts' data exploration scope, and perhaps discover questions I had not yet considered, I was looking for a way to simply pile a bunch of CSV files together then programmatically create a Pearson correlation coefficients report on all feature pairs.
 
+## How to Use GoFish
+1. Download or clone GoFish repository to your machine.
+2. Go to Gapminder.org to download CSV files of interest into the Data directory.
+3. Run GoFish.py
+
 ## How to Contribute
 
 Feel free to submit issues and enhancement requests.
