@@ -13,13 +13,13 @@ from itertools import combinations
 # ***
 # ## Data Wrangling
 # 
-# 1. Find all the CSV files (datasets) in a given directory.
-# 2. Load CSV data into dataframes.
+# 1. Gather CSV files 
+# 2. Load CSV file data into dataframes.
 # 3. Compile the dataframes into a dictionary. 
 # 4. Inspect the data.
 
 
-# Functions for this section
+# Data Wrangling Functions 
 
 def find_csv_files (path_to_dir):
     """Return: List of filenames with suffix in path_to_dir."""
@@ -54,27 +54,27 @@ def print_dfdict_preview(df_dict):
     
 
 
-# Load CSV data into `datasets_full`, a dictionary of dataframes, one dataframe for each CSV file.
+# Load CSV into `datasets_di`, a dictionary of dataframes, 1 dataframe for each CSV file.
 
-# Identify dataset by directory name
-datasets = ['Data']
+# Identify dataset by directory name, allow for more than 1
+dataset_dir_list = ['Data']
 
 
 # Create dictionary of dataframes
 suffix = '.csv'
 
-datasets_full = {}
-for dataset_path_to_dir in datasets:
-    datasets_full.update(csv_dir_to_df_dict(dataset_path_to_dir))
+datasets_di = {}
+for dataset_path_to_dir in dataset_dir_list:
+    datasets_di.update(csv_dir_to_df_dict(dataset_path_to_dir))
 
 
-# All data is now loaded into `datasets_full`.
+# All data is now loaded into `datasets_di`.
 # 
 # Let's preview the loaded data ...
 
 
 # Preview a few rows & columns of each dataframe. Include their shapes.
-print_dfdict_preview(datasets_full)
+print_dfdict_preview(datasets_di)
 
 
 # ***
@@ -102,7 +102,7 @@ print_dfdict_preview(datasets_full)
 
 
 # Initialize meta_df with dataframe names
-meta_df = pd.DataFrame([dfname for dfname in datasets_full.keys()],                         columns=['dataframe'])
+meta_df = pd.DataFrame([dfname for dfname in datasets_di.keys()],                         columns=['dataframe'])
 
 
 # Dataframes were named with CSV filenames, which are long and wordy. Create shorter aliases in `meta_df`.  (TODO: Automate name abbreviations)
@@ -113,7 +113,7 @@ meta_df = pd.DataFrame([dfname for dfname in datasets_full.keys()],             
 alias_di = {}
 # For each df, prompt for alias, default = first word delimited by underscore
 print('\nEnter alias for each dataframe (press enter to accept default):\n')
-for dfname in datasets_full.keys():
+for dfname in datasets_di.keys():
     this_alias = '_'.join(dfname.split('_', 2)[:2])
     this_alias = input('{}: ({})'.format(dfname, this_alias)) or this_alias
     alias_di[dfname] = this_alias
@@ -134,14 +134,14 @@ meta_df
 
 
 # List original dataframe names
-dflist = list(datasets_full.keys())
+dflist = list(datasets_di.keys())
 
 # rename dataframes with their statistic name (mapped in meta_df)
 for df in dflist:
-    datasets_full[meta_df[meta_df['dataframe'] == df].index[0]] = datasets_full.pop(df)
+    datasets_di[meta_df[meta_df['dataframe'] == df].index[0]] = datasets_di.pop(df)
 
 # Verify new dataframe (statistic) names
-list(datasets_full.keys())
+list(datasets_di.keys())
 
 
 # ***
@@ -155,21 +155,19 @@ list(datasets_full.keys())
 f = lambda df: (df.rename(columns={'geo':'country'}).set_index('country'))
 
 # loop through dataframes
-for dfname in list(datasets_full.keys()):
-    datasets_full[dfname] = f(datasets_full[dfname])
+for dfname in list(datasets_di.keys()):
+    datasets_di[dfname] = f(datasets_di[dfname])
 
 
 
 # Confirm all indexes are 'country' 
 # TODO: add error handling procedures
 print('Are all dataframe indexes named "country"?')
-'country' == np.unique(list(map(lambda k: datasets_full[k].index.name, (k for k in datasets_full.keys()))))[0]
+'country' == np.unique(list(map(lambda k: datasets_di[k].index.name, (k for k in datasets_di.keys()))))[0]
 
 
-# Hard copy `datasets_full` (original data) to `datasets_trim` (clean this copy.)
-
-
-datasets_trim = datasets_full.copy()
+# Backup datasets_di before trimming
+datasets_di_backup = datasets_di.copy()
 
 
 # #### Zeros and NaN - Cleanup
@@ -195,7 +193,7 @@ def print_zeros(dfname, df):
 def print_if_all_nulls(df_dict):
     """Return None. Print report, listing any dataframes that have rows containing only null values."""
     found = False
-    for dfname, df in datasets_trim.items():
+    for dfname, df in datasets_di.items():
         if pd.isnull(df).all(1).any():
             print('{} has row with all nulls.'.format(dfname))
             found = True
@@ -209,21 +207,21 @@ def print_if_all_nulls(df_dict):
 
 
 print('DataFrame Rows with Zero Values:')
-[print_zeros(dfname, df) for dfname, df in datasets_trim.items()];
+[print_zeros(dfname, df) for dfname, df in datasets_di.items()];
 
 
 # Translate all Zeros into NaNs ...
 
 
 # Replace zeros with NaN, then drop any rows where all values are NaN. 
-for dfname, df in datasets_trim.items():
-    datasets_trim[dfname] = datasets_trim[dfname].replace({0:np.nan, 0.0:np.nan})
-    datasets_trim[dfname] = datasets_trim[dfname].dropna(how='all')
+for dfname, df in datasets_di.items():
+    datasets_di[dfname] = datasets_di[dfname].replace({0:np.nan, 0.0:np.nan})
+    datasets_di[dfname] = datasets_di[dfname].dropna(how='all')
 
 
 
 # Verify there are no empty rows.
-print_if_all_nulls(datasets_trim)
+print_if_all_nulls(datasets_di)
 
 
 # TODO: more error handling here ... handle any non-empty rows.
@@ -237,12 +235,12 @@ print_if_all_nulls(datasets_trim)
 
 
 # Create list of common countries.
-dflist = list(datasets_trim.values())
+dflist = list(datasets_di.values())
 common_countries_list = pd.concat(dflist, axis=1, join='inner').index
 
 # Add uncommon countries (to be trimmed) to meta_df.
 meta_df['excluded_countries'] = ""
-for data_set, df in datasets_trim.items():
+for data_set, df in datasets_di.items():
     meta_df.loc[data_set]['excluded_countries'] = [x for x in df.index if x not in common_countries_list]
     
 # View the countries to be excluded.
@@ -256,14 +254,14 @@ meta_df
 # Exclude non-common countries from dataframes.
 
 
-for dfname, df in datasets_trim.items():
-    datasets_trim[dfname] = df[df.index.isin(common_countries_list)]
+for dfname, df in datasets_di.items():
+    datasets_di[dfname] = df[df.index.isin(common_countries_list)]
 
 
 # Verify dataframe row counts match (confirming the same number of countries).
 
 
-[print(df.shape[0], dfname) for dfname, df in datasets_trim.items()];
+[print(df.shape[0], dfname) for dfname, df in datasets_di.items()];
 
 
 # TODO: more automated exception handling here, verify working with a uniform set of countries.  
@@ -303,7 +301,7 @@ def trim_df_dict(df_dict, col_list):
 # Before trimming years, record the original year ranges to `meta_df` for reference, and report the Common Year Range.
 
 
-meta_df = pd.concat([meta_df, get_year_metadata(datasets_trim)], axis=1)
+meta_df = pd.concat([meta_df, get_year_metadata(datasets_di)], axis=1)
 meta_df[['first_year','last_year']]
 
 
@@ -321,14 +319,14 @@ print('Common Year Range: {} -> {}\n'.format(first_year, last_year))
 
 
 years_in_range = [str(y) for y in list(range(int(first_year),int(last_year)+1))]
-datasets_trim = trim_df_dict(datasets_trim, years_in_range)
+datasets_di = trim_df_dict(datasets_di, years_in_range)
 
 
 # At this point, dataframes should have the same shape (country rows and year columns). Verify this ... (TODO: automate the verification)
 
 
 # Confirm trimmed datasets. Each dataset should have same year columns.
-[print('{} <-- {}'.format(df.shape, dfname)) for dfname, df in datasets_trim.items()];
+[print('{} <-- {}'.format(df.shape, dfname)) for dfname, df in datasets_di.items()];
 
 
 # ***
@@ -339,7 +337,7 @@ datasets_trim = trim_df_dict(datasets_trim, years_in_range)
 # ## Correlation Analysis
 
 # *** 
-# Use `datasets_trim` for these set of questions, since its dataframes have a consistent country list and range of years. 
+# Use `datasets_di` for these set of questions, since its dataframes have a consistent country list and range of years. 
 # 
 # Consider each dataset an individual 'factor'. 
 # 
@@ -347,13 +345,13 @@ datasets_trim = trim_df_dict(datasets_trim, years_in_range)
 
 # #### Prepare the data
 # Create two new structures:
-# * `dataset_stats` - dictionary of dataframes, similar to the `datasets_trim` dataframes but containing only the averages for each country. (Includes averages of factor statistics. TODO: drop if not needed.)
+# * `dataset_stats` - dictionary of dataframes, similar to the `datasets_di` dataframes but containing only the averages for each country. (Includes averages of factor statistics. TODO: drop if not needed.)
 
 
 
 # Create dataset_stats (dictionary of dataframes of with country means)
 dataset_stats = {}
-for dfname, df in datasets_trim.items():
+for dfname, df in datasets_di.items():
     dataset_stats[dfname] = df.transpose()                            .describe().loc[['mean']]                            .transpose()
 
 
@@ -368,7 +366,7 @@ stats_arr
 
 
 # Create tuple pairs of all our statistic (dataframe) combinations.
-stat_list = list(datasets_trim.keys())
+stat_list = list(datasets_di.keys())
 dataset_corrs = pd.DataFrame(columns=['size','this_stat','that_stat','r'])
 combines = list(combinations(stat_list,2))
 
