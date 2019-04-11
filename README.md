@@ -36,6 +36,7 @@ Note: Please take care to merge the latest from "upstream" before making a pull 
 ### Enhancement Ideas
 GoFish is in it's first Phase of development. As it stands, it searches CSV files already existing in a local directory. Future Phases could include:
 
+* rework the trimming logic and functions that create fixed-size datasets
 * code improvements (improve performance, refactor, document, etc.)
 * do not limit feature exploration to Gapminder.org data
 * more feature filters
@@ -44,6 +45,10 @@ GoFish is in it's first Phase of development. As it stands, it searches CSV file
 
 
 ## GoFish Caveats
+* Each dataset is trimmed to be fixed-size inputs to the correlation function. 
+  For example, dataset A may have a range of years between 1800 and 2020 while dataset B
+  has a range between 2000 and 2010. To create a fixed-size dataset, A is trimmed from 220 
+  years to only 10 years. The same type of trimming is done for countries. 
 * Only CSV files are loaded
 * all CSV files in a given directory are loaded
 * The 'given directory' is hardcoded as **Data**
