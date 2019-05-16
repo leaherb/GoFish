@@ -1,14 +1,12 @@
 # GoFish
 > This project is a work in progress
 
-## Purpose
-
-The purpose of this project is to use Python to search Gapminder.org datasets for possible features of interest by using simple filters:
+Use Python to search Gapminder.org datasets for possible features of interest:
 
 1. feature pairs with a moderate to strong Pearson's correlation coefficient
 2. additional filters TBD
 
-A possible improvement to this project is to incorporate or compare machine learning model(s).
+A possible improvement to this project is to incorporate machine learning.
 
 ## Overview
 
@@ -16,10 +14,17 @@ Gapminder.org offers a large number 'global facts' datasets, available for downl
 
 As a Data Analyst looking for correlations between any number of datasets in order to narrow my 'global facts' data exploration scope, and perhaps discover questions I had not yet considered, I was looking for a way to simply pile a bunch of CSV files together then programmatically create a Pearson correlation coefficients report on all feature pairs.
 
-## How to Use GoFish
-1. Download or clone GoFish repository to your machine.
-2. Go to Gapminder.org to download CSV files of interest into the Data directory.
-3. Run GoFish.py
+## Installation
+Clone the GitHub repository.
+`$ git clone https://github.com/leaherb/GoFish.git`
+
+## Usage
+Currently, GoFish requires Jupyter Notebook.
+
+Download CSV files of interest from Gapminder.org into the /data directory.
+
+Explore possible features of interest using the Notebook and either run cells individually, or Run All.
+`jupyter notebook GoFish.ipynb`
 
 ## How to Contribute
 
@@ -35,7 +40,7 @@ Please use the Udacity Git Commit Message Style Guide (https://udacity.github.io
 
 Note: Please take care to merge the latest from "upstream" before making a pull request.
 
-### Enhancement Ideas
+### TODO
 GoFish is in it's first Phase of development. As it stands, it searches CSV files already existing in a local directory. Future Phases could include:
 
 * rework the trimming logic and functions that create fixed-size datasets
