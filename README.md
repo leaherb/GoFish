@@ -3,10 +3,12 @@
 
 ## Purpose
 
-The purpose of this project is to search Gapminder.org datasets for features of interest using simple filters:
+The purpose of this project is to use Python to search Gapminder.org datasets for possible features of interest by using simple filters:
 
 1. feature pairs with a moderate to strong Pearson's correlation coefficient
 2. additional filters TBD
+
+A possible improvement to this project is to incorporate or compare machine learning model(s).
 
 ## Overview
 
