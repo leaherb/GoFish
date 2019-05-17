@@ -8,37 +8,41 @@ Use Python to search Gapminder.org datasets for possible features of interest:
 
 A possible improvement to this project is to incorporate machine learning.
 
-## Overview
+<img src="docs/GoFishPlot.png" alt="GoFish correlation plot" width="300px" height="auto">
+
+## Motivation
 
 Gapminder.org offers a large number 'global facts' datasets, available for download (https://www.gapminder.org/data/). Most of these datasets include feature calculations for each country for a range of years. For example: the population of each country starting in 1800 and forecasted through to 2100.  
 
-As a Data Analyst looking for correlations between any number of datasets in order to narrow my 'global facts' data exploration scope, and perhaps discover questions I had not yet considered, I was looking for a way to simply pile a bunch of CSV files together then programmatically create a Pearson correlation coefficients report on all feature pairs.
+As a Data Analyst looking for correlations between any number of datasets. In order to narrow the scope of my data exploration, I wanted to simply pile a bunch of CSV files together then programmatically create a Pearson correlation coefficients report on all feature pairs. That's when I started developing GoFish.
 
 ## Installation
 
 Clone the GitHub repository.
 
-`
+```sh
 $ git clone https://github.com/leaherb/GoFish.git
-`
+```
 
-## Usage
+## Usage example
 
-Currently, GoFish requires Jupyter Notebook.
+Currently, GoFish requires Jupyter Notebook, and data files need to be downloaded manually.
 
-Download CSV files of interest from Gapminder.org into the /data directory.
+First, download CSV files of interest from Gapminder.org into the /data directory.
 
-Explore possible features of interest using the Notebook and either run cells individually, or Run All.
+Then invoke Jupyter Notebook. 
 
-`
+```sh
 jupyter notebook GoFish.ipynb
-`
+```
+
+Either run cells individually and customize as you see fit, or Run All.
 
 ## How to Contribute
 
-Feel free to submit issues and enhancement requests.
+I encourage you to make pull requests and help improve this project.
 
-Please use the Udacity Git Commit Message Style Guide (https://udacity.github.io/git-styleguide/), and follow the "fork-and-pull" Git workflow:
+Use the Udacity Git Commit Message Style Guide (https://udacity.github.io/git-styleguide/), and follow the "fork-and-pull" Git workflow:
 
 1. Fork the repo on GitHub
 1. Clone the project to your own computer
@@ -59,7 +63,7 @@ GoFish is in it's first Phase of development. As it stands, it searches CSV file
 * a user interface front-end
 
 
-## GoFish Caveats
+## Caveats
 * Each dataset is trimmed to be fixed-size inputs to the correlation function. 
   For example, dataset A may have a range of years between 1800 and 2020 while dataset B
   has a range between 2000 and 2010. To create a fixed-size dataset, A is trimmed from 220 
