@@ -1,12 +1,11 @@
 # GoFish
-> This project is a work in progress
 
 Use Python to search Gapminder.org datasets for possible features of interest:
 
 1. feature pairs with a moderate to strong Pearson's correlation coefficient
 2. additional filters TBD
 
-A possible improvement to this project is to incorporate machine learning.
+A possible improvement to this project is to incorporate or compare to machine learning techniques.
 
 <img src="docs/GoFishPlot.png" alt="GoFish correlation plot" width="300px" height="auto">
 
