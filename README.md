@@ -4,6 +4,8 @@ Use Python to search Gapminder.org datasets for features with a moderate-to-stro
 
 <img src="docs/GoFishPlot.png" alt="GoFish correlation plot" width="300px" height="auto">
 
+[(hint: view notebook using html version: ](https://github.com/leaherb/GoFish/blob/master/GoFish.html)
+
 ## Motivation
 
 Gapminder.org offers a wide variety of 'global fact' datasets, available for download (https://www.gapminder.org/data/). Most datasets include feature statistics for each country over a range of years. For example: 'population_total' lists the annual population count of each country starting in 1800 and forecasted through to 2100.  
