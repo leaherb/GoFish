@@ -1,6 +1,6 @@
 # GoFish
 
-Use Python to search Gapminder.org datasets for features with a moderate-to-strong Pearson's correlation coefficient
+Use Python to search Gapminder.org datasets for features with a moderate-to-strong Pearson's correlation coefficient.
 
 <img src="docs/GoFishPlot.png" alt="GoFish correlation plot" width="300px" height="auto">
 
