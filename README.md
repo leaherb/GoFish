@@ -4,7 +4,7 @@ Use Python to search Gapminder.org datasets for features with a moderate-to-stro
 
 <img src="docs/GoFishPlot.png" alt="GoFish correlation plot" width="300px" height="auto">
 
-([hint: view notebook using html version: ](https://github.com/leaherb/GoFish/blob/master/GoFish.html))
+([hint: view notebook: ](https://nbviewer.jupyter.org/github/leaherb/GoFish/blob/master/GoFish.ipynb))
 
 ## Motivation
 
