@@ -24,7 +24,7 @@ $ git clone https://github.com/leaherb/GoFish.git
 
 Currently, GoFish requires Jupyter Notebook, and data files need to be downloaded manually.
 
-First, download CSV files of interest from Gapminder.org into the /data directory.
+First, download CSV files of interest from Gapminder.org into the ./Data directory.
 
 Then invoke Jupyter Notebook. 
 
@@ -67,7 +67,7 @@ GoFish is in it's first Phase of development. As it stands, it searches CSV file
   years to only 10 years. The same type of trimming is done for countries. 
 * Only CSV files are loaded
 * all CSV files in a given directory are loaded
-* The 'given directory' is hardcoded as **./data**
+* The 'given directory' is hardcoded as **./Data**
 * All CSV file datasets are assumed to have the following structure:
  * Column 1: country (regardless of column header)
  * Column 2-n: 4-digit year
