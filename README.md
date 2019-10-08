@@ -1,19 +1,16 @@
 # GoFish
 
-Use Python to search Gapminder.org datasets for possible features of interest:
-
-1. feature pairs with a moderate to strong Pearson's correlation coefficient
-2. additional filters TBD
-
-A possible improvement to this project is to incorporate or compare to machine learning techniques.
+Use Python to search Gapminder.org datasets for features with a moderate-to-strong Pearson's correlation coefficient
 
 <img src="docs/GoFishPlot.png" alt="GoFish correlation plot" width="300px" height="auto">
 
 ## Motivation
 
-Gapminder.org offers a large number 'global facts' datasets, available for download (https://www.gapminder.org/data/). Most of these datasets include feature calculations for each country for a range of years. For example: the population of each country starting in 1800 and forecasted through to 2100.  
+Gapminder.org offers a wide variety of 'global fact' datasets, available for download (https://www.gapminder.org/data/). Most datasets include feature statistics for each country over a range of years. For example: 'population_total' lists the annual population count of each country starting in 1800 and forecasted through to 2100.  
 
-As a Data Analyst looking for correlations between any number of datasets. In order to narrow the scope of my data exploration, I wanted to simply pile a bunch of CSV files together then programmatically create a Pearson correlation coefficients report on all feature pairs. That's when I started developing GoFish.
+It would be interesting to find correlations between features. For example, is there a correlation between poverty rates and water supply? To help find possible feature correlations, I wanted to simply pile a bunch of downloaded CSV files together then programmatically create a Pearson correlation coefficients report on all feature pairs. 
+
+That's what GoFish does: it inputs a pile of CSV Gapminder.org downloads and outputs a simple report of promising feature correlations. 
 
 ## Installation
 
@@ -54,6 +51,7 @@ Note: Please take care to merge the latest from "upstream" before making a pull 
 ### TODO
 GoFish is in it's first Phase of development. As it stands, it searches CSV files already existing in a local directory. Future Phases could include:
 
+* create or find an API into Gapminder to eliminate the need for manual downloads
 * rework the trimming logic and functions that create fixed-size datasets
 * code improvements (improve performance, refactor, document, etc.)
 * do not limit feature exploration to Gapminder.org data
@@ -69,7 +67,7 @@ GoFish is in it's first Phase of development. As it stands, it searches CSV file
   years to only 10 years. The same type of trimming is done for countries. 
 * Only CSV files are loaded
 * all CSV files in a given directory are loaded
-* The 'given directory' is hardcoded as **Data**
+* The 'given directory' is hardcoded as **./data**
 * All CSV file datasets are assumed to have the following structure:
  * Column 1: country (regardless of column header)
  * Column 2-n: 4-digit year
